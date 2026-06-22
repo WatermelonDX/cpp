@@ -32,6 +32,7 @@ class tree{
                 curr = curr->next.back();
             }
         }
+        void del(string str);
         void search(string str){
             node *curr = mother;
             for(char ci: str){
@@ -43,6 +44,7 @@ class tree{
                 }
             }
         }
+        void show();
 };
 
 
@@ -51,6 +53,5 @@ int main(){
     arbol.add("wawa");
     arbol.add("waska");
     arbol.add("whiskas");
-    arbol.search("wawa");
-    arbol.search("wapa");
+    arbol.search("whiskas");
 }
