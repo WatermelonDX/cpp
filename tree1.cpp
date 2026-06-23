@@ -1,82 +1,88 @@
 #include <iostream>
 #include <string>
 #include <queue>
-#include <stack>
 
 using namespace std;
+template <typename t>
 
 class node{
-    public:
-        string val;
-        node *right;
+    public: 
+        t value;
         node *left;
-        node(string val){
-            this->val = val;
-            this->right = nullptr;
+        node *right;
+        node(t value){
+            this->value = value;
             this->left = nullptr;
+            this->right = nullptr;
         }
 };
 
-class tree{
-    private:
-        node *root;
-    public:
-        tree(string val){
-            root = new node(val);
-            cout << "Barrier initialized!" << endl;
-        }
-        void add(string val){
-            queue<node*>q;
-            q.push(root);
-            node *curr;
 
-            while (true){
+template <typename t>
+class tree{ 
+    public: 
+        node<t> *root;
+        tree(t value){
+            root = new node<t>(value);
+        }
+        void add(t value){
+            node<t> *curr = root;
+            queue<node<t>*> q;
+            q.push(curr);
+            while(true){
                 curr = q.front();
                 if(curr->left == nullptr){
-                    curr->left = new node(val); 
-                    cout << "Node added succesfully" << endl;
+                    curr->left = new node<t>(value);
+                    cout << "Node added successfully" << endl;
                     return;
                 }else{
                     q.push(curr->left);
                 }
 
                 if(curr->right == nullptr){
-                    curr->left = new node(val);
-                    cout << "Node added succesfully" << endl;
+                    curr->right = new node<t>(value);
+                    cout << "Node added successfully" << endl;
                     return;
                 }else{
                     q.push(curr->right);
                 }
+
                 q.pop();
             }
-
         }
+
         void show(){
-            queue<node*>qe;
-            qe.push(root);
-            node *curr;
-            
-            while (!(qe.empty())){
-                curr = qe.front();
-                cout << curr->val << endl;
+            queue<node<t>*> q;
+            q.push(root);
+
+            while(!q.empty()){
+                node<t>* curr = q.front();
+                cout << curr->value << endl;
                 if(curr->left != nullptr){
-                    qe.push(curr->left);
+                    q.push(curr->left);
                 }
                 if(curr->right != nullptr){
-                    qe.push(curr->right);
+                    q.push(curr->right);
                 }
-                qe.pop();
+                q.pop();
             }
         }
-        
+
+
 };
 
 
 int main(){
-    tree mytree("bazinga");
-    mytree.add("el pepe");
-    mytree.add("ete sech");
-    mytree.add("potaxio");
-    mytree.add("XD");
-    mytree.show();
+        tree mytree("jason");
+        mytree.add("wawa");
+        mytree.add("gaga");
+        mytree.add("fafa");
+        mytree.add("gaga");
+        mytree.add("xd");
+        mytree.add("gaga");
+
+        cout <<  "Node 1" << " " << mytree.root->value << " " << mytree.root->right->value <<" " << mytree.root->left->value << endl;
+        cout <<  "Node 2" << " " << mytree.root->left->value << " " << mytree.root->left->left->value <<" " << mytree.root->left->right->value << endl;
+
+        mytree.show();
 }
