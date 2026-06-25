@@ -19,7 +19,7 @@ class node{
 
 
 template <typename t>
-class tree{ 
+class tree{
     public: 
         node<t> *root;
         tree(t value){
